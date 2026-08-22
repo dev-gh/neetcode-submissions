@@ -1,0 +1,62 @@
+'''
+Given the root of a binary tree, return its depth.
+
+The depth of a binary tree is defined as the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+Example 1:
+
+Input: root = [1,2,3,null,null,4]
+
+Output: 3
+
+Example 2:
+
+Input: root = []
+
+Output: 0
+
+Constraints:
+
+    0 <= The number of nodes in the tree <= 100.
+    -100 <= Node.val <= 100
+
+'''
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        max_depth = 0
+       
+        if root is None:
+            return max_depth
+
+        depth = 1
+        unchecked_nodes = [(root, depth)]
+
+        left = None
+        right = None
+        node_depth = None
+        while len(unchecked_nodes) != 0:
+            node, node_depth = unchecked_nodes.pop()
+            left, right = node.left, node.right
+            max_depth = max(max_depth, node_depth)
+
+            if left is not None:
+                unchecked_nodes.append((left, node_depth + 1))
+
+            if right is not None:
+                unchecked_nodes.append((right, node_depth + 1))
+
+        return max_depth
+
+        
+
+
+
+
+
