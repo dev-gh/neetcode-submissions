@@ -1,0 +1,41 @@
+'''
+Given an array nums of unique integers, return all the possible permutations. You may return the answer in any order.
+
+Example 1:
+
+Input: nums = [1,2,3]
+
+Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+Example 2:
+
+Input: nums = [7]
+
+Output: [[7]]
+
+Constraints:
+
+    1 <= nums.length <= 6
+    -10 <= nums[i] <= 10
+
+
+'''
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        stack = [([], nums)]
+
+        while stack:
+            current, left = stack.pop()
+            if len(current) == len(nums):
+                result.append(current)
+                continue
+            
+            for n in left:
+                local = left.copy()
+                local.remove(n)
+                stack.append((current + [n], local))
+
+        return result
+
+        
